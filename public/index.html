@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
+    <meta name="theme-color" content="#141414" />
     <meta
       name="description"
       content="Web site created using create-react-app"
@@ -14,28 +14,225 @@
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json"/>
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
-
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>React App</title>
-  </head>
-  <body>
+    <title>Netflix Style VAT Calculator</title>
+    <style>
+        /* Netflix Brand Design Token Overrides */
+        :root {
+            --bg-color: #141414;        /* Deep Netflix Black */
+            --card-bg: #181818;         /* Dark Charcoal Container */
+            --text-main: #ffffff;       /* Pure White Typography */
+            --text-muted: #aaaaaa;      /* Standard Gray Subtext */
+            --primary: #E50914;         /* Signature Netflix Red */
+            --input-bg: #333333;        /* Dark Form Input Canvas */
+            --border: #444444;          /* Soft Structural Borders */
+            --radius: 4px;              /* Sharp, Minimal Corner Rounding */
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        /* Container Card */
+        .calculator-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+            padding: 40px;
+            width: 100%;
+            max-width: 450px;
+            box-sizing: border-box;
+            border-top: 4px solid var(--primary); /* Accent Top border */
+        }
+
+        /* Centered Header Logo Wrapper */
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .logo-container img {
+            height: 80px; /* Kept at your explicit 80px scale layout height */
+            width: auto;
+        }
+
+        h1 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-top: 0;
+            margin-bottom: 28px;
+            color: var(--text-main);
+            letter-spacing: -0.5px;
+            text-align: center; /* Center aligned to balance underneath the logo */
+        }
+
+        /* Form Layout Elements */
+        .form-group {
+            margin-bottom: 24px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Form Controls Styled to Match Streaming UI */
+        input[type="text"], select {
+            width: 100%;
+            padding: 14px;
+            font-size: 1rem;
+            border: none;
+            border-bottom: 2px solid transparent;
+            border-radius: var(--radius);
+            background-color: var(--input-bg);
+            color: var(--text-main);
+            box-sizing: border-box;
+            transition: all 0.2s ease-in-out;
+        }
+
+        /* High Contrast Focus State mimicking standard Netflix logins */
+        input[type="text"]:focus, select:focus {
+            outline: none;
+            background-color: #454545;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        /* Dynamic Output Box Details */
+        .output-display {
+            background-color: #222222;
+            border-left: 4px solid var(--primary);
+            padding: 16px;
+            margin: 28px 0 16px 0;
+            border-radius: 2px;
+        }
+
+        .output-display span {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary); /* Result glows in signature red */
+        }
+
+        /* Hostname & Branding Footer styling */
+        .meta-footer {
+            margin-top: 36px;
+            width: 100%;
+            max-width: 450px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            border-top: 1px solid var(--border);
+            padding-top: 24px;
+        }
+
+        .hostname-layout {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.75rem;
+            background: var(--input-bg);
+            color: var(--text-muted);
+            padding: 6px 14px;
+            border-radius: 2px;
+            font-family: monospace;
+            letter-spacing: 1px;
+        }
+
+        .hostname-layout h3 {
+            font-size: 0.75rem;
+            margin: 0;
+            font-weight: normal;
+            text-transform: uppercase;
+        }
+
+        .hostname-layout p {
+            margin: 0;
+            display: inline;
+        }
+
+        .copyright {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
+    
+    <!-- React Main Root Entry Point -->
     <div id="root"></div>
-     <h3>Hostname</h3>
-    <p id="host"></p>
-    <img src="images.jpg" height="200px" alt="bart simpson">
-    <p>&copy;bartsimpson</p>
+
+    <!-- Main UI Card Container -->
+    <div class="calculator-card">
+        
+        <!-- Center Logo Wrapper above the main Title (Using your file: MB.png) -->
+        <div class="logo-container">
+            <img src="MB.png" alt="bart simpson">
+        </div>
+
+        <h1>VAT Calculator</h1>
+        
+        <div class="form-group">
+            <label for="vat-rate">VAT Rate</label>
+            <select id="vat-rate">
+                <option value="20">20%</option>
+                <option value="15">15%</option>
+                <option value="5">5%</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="price-excl">Price Excl. VAT</label>
+            <input type="text" id="price-excl" placeholder="0.00">
+        </div>
+
+        <div class="output-display">
+            <label>VAT to Pay</label>
+            <div><span>0.00</span></div>
+        </div>
+
+        <div class="form-group" style="margin-top: 20px;">
+            <label for="price-incl">Price Incl. VAT</label>
+            <input type="text" id="price-incl" placeholder="0.00">
+        </div>
+    </div>
+
+    <!-- Dark Meta Context Footer -->
+    <div class="meta-footer">
+        <div class="hostname-layout">
+            <h3>Host //</h3> 
+            <p id="host"></p>
+        </div>
+        <div class="copyright">&copy;bartsimpson</div>
+    </div>
+
+    <!-- Live Execution Logic Script -->
     <script>
       let hostname = location.hostname;
-      document.getElementById("host").innerHTML = hostname;
+      document.getElementById("host").innerHTML = hostname || "localhost";
     </script>
-  </body>
+</body>
 </html>
