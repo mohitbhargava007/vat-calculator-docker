@@ -1,0 +1,2 @@
+image: 290918mb/vat:<+pipeline.sequenceId>
+replicas: 1
